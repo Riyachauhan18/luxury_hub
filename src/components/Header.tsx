@@ -73,9 +73,9 @@ export default function Header() {
             : 'py-6 bg-gradient-to-b from-[#050505] to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/" className="relative h-11 sm:h-14 w-44 sm:w-56 md:w-60 ml-1 sm:ml-3 lg:ml-6 flex items-center shrink-0">
+          <Link href="/" className="relative h-10 sm:h-14 w-32 sm:w-56 md:w-60 flex items-center shrink-0">
             <Image
               src="/logo.png"
               alt="THE LUXURY HUB"
@@ -101,13 +101,13 @@ export default function Header() {
           </nav>
 
           {/* Action Icons & Language Switcher */}
-          <div className="flex items-center space-x-2 sm:space-x-4 text-neutral-300">
+          <div className="flex items-center space-x-1 sm:space-x-3 text-neutral-300 shrink-0">
             
             {/* EN | हिन्दी Refined Capsule Language Switcher */}
-            <div className="flex items-center bg-[#0C0C0C]/90 border border-white/15 rounded-full p-0.5 sm:p-1 text-[10px] sm:text-[11px] font-medium font-sans backdrop-blur-md shadow-sm shrink-0">
+            <div className="flex items-center bg-[#0C0C0C]/90 border border-white/15 rounded-full p-0.5 text-[9px] sm:text-[11px] font-medium font-sans backdrop-blur-md shadow-sm shrink-0">
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full transition-all duration-300 cursor-pointer ${
                   language === 'en' 
                     ? 'bg-[#C5A85C] text-[#050505] font-semibold shadow-sm' 
                     : 'text-neutral-400 hover:text-white'
@@ -119,7 +119,7 @@ export default function Header() {
               <span className="text-neutral-700 px-0.5 select-none">|</span>
               <button
                 onClick={() => setLanguage('hi')}
-                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`px-1.5 sm:px-3 py-0.5 sm:py-1 rounded-full transition-all duration-300 cursor-pointer ${
                   language === 'hi' 
                     ? 'bg-[#C5A85C] text-[#050505] font-semibold shadow-sm' 
                     : 'text-neutral-400 hover:text-white'
@@ -133,33 +133,33 @@ export default function Header() {
             {/* Search Icon */}
             <button
               onClick={() => setShowSearch(!showSearch)}
-              className="hover:text-[#D4AF37] transition-colors p-1.5 cursor-pointer shrink-0"
+              className="hover:text-[#D4AF37] transition-colors p-1 sm:p-1.5 cursor-pointer shrink-0"
               aria-label="Toggle search panel"
             >
-              <Search className="w-5 h-5 stroke-[1.5]" />
+              <Search className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-[1.5]" />
             </button>
 
             {/* Enquiry Cart Icon */}
             <Link 
               href="/enquiry" 
-              className="relative hover:text-[#D4AF37] transition-colors p-1.5 shrink-0" 
+              className="relative hover:text-[#D4AF37] transition-colors p-1 sm:p-1.5 shrink-0" 
               aria-label="View enquiry list"
             >
-              <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
+              <ShoppingBag className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-[1.5]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 gold-gradient-bg text-[#050505] text-[10px] font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center font-sans">
+                <span className="absolute -top-1 -right-1 gold-gradient-bg text-[#050505] text-[10px] font-bold rounded-full w-4 h-4 sm:w-4.5 sm:h-4.5 flex items-center justify-center font-sans">
                   {cartCount}
                 </span>
               )}
             </Link>
 
-            {/* Mobile Hamburger Trigger - Prominent Gold Accent */}
+            {/* Mobile Hamburger Trigger - Guaranteed Visibility */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-lg border border-[#C5A85C]/40 bg-[#0C0C0C]/80 text-[#C5A85C] hover:bg-[#C5A85C]/10 transition-all cursor-pointer shrink-0 ml-1"
+              className="lg:hidden p-1.5 sm:p-2 rounded-lg border border-[#C5A85C] bg-[#0C0C0C] text-[#C5A85C] hover:bg-[#C5A85C]/20 transition-all cursor-pointer shrink-0"
               aria-label="Toggle navigation drawer"
             >
-              {isOpen ? <X className="w-6 h-6 stroke-[2]" /> : <Menu className="w-6 h-6 stroke-[2]" />}
+              {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />}
             </button>
           </div>
         </div>
