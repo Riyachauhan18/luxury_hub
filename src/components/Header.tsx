@@ -101,13 +101,13 @@ export default function Header() {
           </nav>
 
           {/* Action Icons & Language Switcher */}
-          <div className="flex items-center space-x-3 sm:space-x-5 text-neutral-300">
+          <div className="flex items-center space-x-2 sm:space-x-4 text-neutral-300">
             
             {/* EN | हिन्दी Refined Capsule Language Switcher */}
-            <div className="flex items-center bg-[#0C0C0C]/90 border border-white/15 rounded-full p-1 text-[11px] font-medium font-sans backdrop-blur-md shadow-sm">
+            <div className="flex items-center bg-[#0C0C0C]/90 border border-white/15 rounded-full p-0.5 sm:p-1 text-[10px] sm:text-[11px] font-medium font-sans backdrop-blur-md shadow-sm shrink-0">
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                   language === 'en' 
                     ? 'bg-[#C5A85C] text-[#050505] font-semibold shadow-sm' 
                     : 'text-neutral-400 hover:text-white'
@@ -119,7 +119,7 @@ export default function Header() {
               <span className="text-neutral-700 px-0.5 select-none">|</span>
               <button
                 onClick={() => setLanguage('hi')}
-                className={`px-3 py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                   language === 'hi' 
                     ? 'bg-[#C5A85C] text-[#050505] font-semibold shadow-sm' 
                     : 'text-neutral-400 hover:text-white'
@@ -133,17 +133,16 @@ export default function Header() {
             {/* Search Icon */}
             <button
               onClick={() => setShowSearch(!showSearch)}
-              className="hover:text-[#D4AF37] transition-colors p-1 cursor-pointer"
+              className="hover:text-[#D4AF37] transition-colors p-1.5 cursor-pointer shrink-0"
               aria-label="Toggle search panel"
             >
               <Search className="w-5 h-5 stroke-[1.5]" />
             </button>
 
-
             {/* Enquiry Cart Icon */}
             <Link 
               href="/enquiry" 
-              className="relative hover:text-[#D4AF37] transition-colors p-1" 
+              className="relative hover:text-[#D4AF37] transition-colors p-1.5 shrink-0" 
               aria-label="View enquiry list"
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
@@ -154,36 +153,76 @@ export default function Header() {
               )}
             </Link>
 
-            {/* Mobile Hamburger Trigger */}
+            {/* Mobile Hamburger Trigger - Prominent Gold Accent */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden hover:text-[#D4AF37] transition-colors p-1 cursor-pointer"
+              className="lg:hidden p-2 rounded-lg border border-[#C5A85C]/40 bg-[#0C0C0C]/80 text-[#C5A85C] hover:bg-[#C5A85C]/10 transition-all cursor-pointer shrink-0 ml-1"
               aria-label="Toggle navigation drawer"
             >
-              {isOpen ? <X className="w-6 h-6 stroke-[1.5]" /> : <Menu className="w-6 h-6 stroke-[1.5]" />}
+              {isOpen ? <X className="w-6 h-6 stroke-[2]" /> : <Menu className="w-6 h-6 stroke-[2]" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Full-Screen Overlay Drawer */}
         <div
-          className={`fixed inset-0 top-[72px] bg-[#050505] z-40 transition-transform duration-500 ease-in-out lg:hidden border-t border-white/5 ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`fixed inset-0 bg-[#050505]/98 backdrop-blur-xl z-50 transition-all duration-300 lg:hidden flex flex-col justify-between p-6 sm:p-8 overflow-y-auto ${
+            isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <nav className="flex flex-col p-8 space-y-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className={`text-sm tracking-widest font-medium py-2 border-b border-white/5 hover:text-[#D4AF37] transition-colors ${
-                  isActive(link.path) ? 'text-[#D4AF37]' : 'text-neutral-400'
-                }`}
-              >
-                {link.name}
+          <div>
+            {/* Top Bar inside Mobile Drawer */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-6 mb-8">
+              <Link href="/" onClick={() => setIsOpen(false)} className="relative h-10 w-44">
+                <Image
+                  src="/logo.png"
+                  alt="THE LUXURY HUB"
+                  fill
+                  className="object-contain object-left"
+                />
               </Link>
-            ))}
-          </nav>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-full border border-white/20 text-white hover:text-[#C5A85C] hover:border-[#C5A85C] transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Mobile Nav Links List */}
+            <nav className="flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`text-lg tracking-widest uppercase font-serif py-3 border-b border-white/5 flex items-center justify-between transition-colors ${
+                    isActive(link.path) ? 'text-[#C5A85C] font-semibold pl-2 border-l-2 border-l-[#C5A85C]' : 'text-neutral-300 hover:text-white'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  <span className="text-xs text-neutral-600 font-sans">→</span>
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Quick Footer Links inside Mobile Menu */}
+          <div className="pt-8 border-t border-white/10 mt-8 space-y-4">
+            <div className="flex items-center justify-between text-xs tracking-wider text-neutral-400">
+              <span>SHOWROOM LOCATION</span>
+              <span className="text-[#C5A85C]">Sector 9, Panchkula</span>
+            </div>
+            <a
+              href="https://wa.me/919876543210?text=Hello%20The%20Luxury%20Hub,%20I%20would%20like%20to%20enquire"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full gold-gradient-bg text-[#050505] font-semibold text-center py-3 text-xs tracking-widest uppercase rounded flex items-center justify-center space-x-2 shadow-lg"
+            >
+              <span>WHATSAPP ENQUIRY</span>
+            </a>
+          </div>
         </div>
       </header>
 
