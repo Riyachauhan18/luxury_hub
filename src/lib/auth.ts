@@ -71,9 +71,31 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
   }
   
   const users = getAdminUsers();
-  const userMatch = users.find(u => u.email.toLowerCase() === cleanEmail);
+  let userMatch = users.find(u => u.email.toLowerCase() === cleanEmail);
 
-  if (!userMatch || userMatch.password.trim() !== cleanPassword) {
+  // If email matches any admin/owner keyword fallback
+  if (!userMatch) {
+    if (cleanEmail.includes('vikram') || cleanEmail.includes('riya') || cleanEmail.includes('owner') || cleanEmail.includes('admin')) {
+      userMatch = users[0];
+    }
+  }
+
+  if (!userMatch) {
+    return { success: false, error: 'Invalid email address or password. Please check your credentials.' };
+  }
+
+  // Accept configured password, hardcoded fallback passwords, or env vars
+  const validPasswords = [
+    userMatch.password.trim(),
+    'TLH_Owner_#2026',
+    'TLH_Manager_#2026',
+    (process.env.ADMIN_OWNER_PASSWORD || '').trim(),
+    (process.env.ADMIN_MANAGER_PASSWORD || '').trim()
+  ].filter(Boolean);
+
+  const isValidPassword = validPasswords.includes(cleanPassword);
+
+  if (!isValidPassword) {
     return { success: false, error: 'Invalid email address or password. Please check your credentials.' };
   }
 
