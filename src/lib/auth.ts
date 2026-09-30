@@ -20,30 +20,46 @@ export function setCustomPasswords(ownerPass?: string, managerPass?: string) {
 }
 
 export function getAdminUsers() {
-  const ownerEmail = (process.env.ADMIN_OWNER_EMAIL || 'riyachauhan2608@gmail.com').trim().toLowerCase();
-  const ownerName = (process.env.ADMIN_OWNER_NAME || 'Showroom Owner & MD').trim();
+  const envOwnerEmail = (process.env.ADMIN_OWNER_EMAIL || 'Vikramshekhawat3177@gmail.com').trim().toLowerCase();
+  const ownerName = (process.env.ADMIN_OWNER_NAME || 'Vikram Shekhawat (Owner & MD)').trim();
   const ownerPassword = customOwnerPassword || (process.env.ADMIN_OWNER_PASSWORD || 'TLH_Owner_#2026').trim();
 
   const managerEmail = (process.env.ADMIN_MANAGER_EMAIL || 'admin@theluxuryhub.com').trim().toLowerCase();
   const managerName = (process.env.ADMIN_MANAGER_NAME || 'Showroom Manager').trim();
   const managerPassword = customManagerPassword || (process.env.ADMIN_MANAGER_PASSWORD || 'TLH_Manager_#2026').trim();
 
-  return [
+  const adminUsers = [
     {
       id: 'user-owner-1',
-      email: ownerEmail,
+      email: envOwnerEmail,
       name: ownerName,
       role: 'OWNER' as const,
       password: ownerPassword
     },
     {
-      id: 'user-admin-2',
+      id: 'user-owner-2',
+      email: 'vikramshekhawat3177@gmail.com',
+      name: 'Vikram Shekhawat (Owner & MD)',
+      role: 'OWNER' as const,
+      password: ownerPassword
+    },
+    {
+      id: 'user-owner-3',
+      email: 'riyachauhan2608@gmail.com',
+      name: 'Riya Chauhan (Owner)',
+      role: 'OWNER' as const,
+      password: ownerPassword
+    },
+    {
+      id: 'user-admin-4',
       email: managerEmail,
       name: managerName,
       role: 'ADMIN' as const,
       password: managerPassword
     }
   ];
+
+  return adminUsers;
 }
 
 export async function loginAdmin(email: string, password: string): Promise<{ success: boolean; user?: AdminUser; error?: string }> {
